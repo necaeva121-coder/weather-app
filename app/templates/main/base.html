@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/libs/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    {% block style %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<div class="page">
+    <header class="main-header">{%include 'main/_header.html'%}</header>
+    <main class="content container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="container mt-3">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+        <h1>{{self.title()}}</h1>
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="py-3 my-4">{%include 'main/_footer.html'%}</footer>
+
+
+</div>
+
+
+    <script src="{{url_for('static', filename='js/libs/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
+</body>
+</html>

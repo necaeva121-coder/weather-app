@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+
+{% block title %}О приложении{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm border-0">
+  <div class="card-body p-4">
+    <h2 class="fw-semibold mb-3">Что умеет Weather App</h2>
+    <p class="text-muted mb-4">Лёгкое веб-приложение для просмотра текущей погоды и прогноза.</p>
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="p-3 bg-info-subtle rounded-3 h-100">
+          <h6 class="fw-semibold mb-2">Текущая погода</h6>
+          <p class="mb-0 text-muted">Температура, влажность, ветер и описание для выбранного города.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 bg-success-subtle rounded-3 h-100">
+          <h6 class="fw-semibold mb-2">Прогноз 5 дней</h6>
+          <p class="mb-0 text-muted">Дневной минимум/максимум и краткое описание на ближайшие 5 дней.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 bg-warning-subtle rounded-3 h-100">
+          <h6 class="fw-semibold mb-2">Избранное и история</h6>
+          <p class="mb-0 text-muted">Авторизованные пользователи сохраняют запросы и любимые города.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <h6 class="fw-semibold mb-2">Технологии</h6>
+      <ul class="mb-0 text-muted">
+        <li>Flask, Flask-Login, Flask-WTF</li>
+        <li>SQLite + SQLAlchemy для хранения аккаунтов, истории и избранного</li>
+        <li>Open-Meteo API для погодных данных</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

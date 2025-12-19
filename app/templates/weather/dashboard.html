@@ -1,0 +1,67 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Погода{% endblock %}
+
+{% block content %}
+{% if weather %}
+<div class="row g-3">
+  <div class="col-12 col-lg-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span class="fw-semibold">Текущая погода — {{ weather.city }}</span>
+        {% if current_user.is_authenticated %}
+        <form method="post" action="{{ url_for('weather.add_favorite') }}" class="mb-0">
+          {{ form.csrf_token }}
+          <input type="hidden" name="city" value="{{ weather.city }}">
+          <button class="btn btn-sm btn-outline-primary" type="submit">В избранное</button>
+        </form>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <p class="mb-2"><strong>Состояние:</strong> {{ weather.current.description }}</p>
+        <p class="mb-2"><strong>Температура:</strong> {{ weather.current.temperature }} °C</p>
+        <p class="mb-2"><strong>Влажность:</strong> {% if weather.current.humidity is not none %}{{ "%.0f"|format(weather.current.humidity) }}%{% else %}—{% endif %}</p>
+        <p class="mb-0"><strong>Скорость ветра:</strong> {{ weather.current.wind_speed }} м/с</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <div class="card shadow-sm h-100">
+      <div class="card-header fw-semibold">Прогноз на 5 дней</div>
+      <div class="table-responsive">
+        <table class="table mb-0">
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Описание</th>
+              <th>Днём</th>
+              <th>Ночью</th>
+              <th>Ветер</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for day in weather.forecast %}
+            <tr>
+              <td>{{ day.date.strftime('%d.%m') }}</td>
+              <td>{{ day.description }}</td>
+              <td>{{ day.temp_max }} °C</td>
+              <td>{{ day.temp_min }} °C</td>
+              <td>
+                {% if day.wind_speed is not none %}
+                  {{ day.wind_speed }} м/с
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+  <div class="alert alert-info">Пока нет данных. Выберите город на странице «Погода».</div>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,50 @@
+body {
+    background: #f5f7fb;
+    color: #1f2d3d;
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.page {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-header {
+    background: #0d6efd;
+    padding: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.content {
+    padding: 32px 16px 48px;
+    flex: 1 1 auto;
+}
+
+.header__img {
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #ffffff, #f0f6ff);
+}
+
+.feature-card {
+    border: none;
+}
+
+.feature-card .card-body {
+    padding: 32px 24px;
+}
+
+.table th {
+    color: #5b6b7a;
+    font-weight: 600;
+}
+
+.table td {
+    color: #1f2d3d;
+}

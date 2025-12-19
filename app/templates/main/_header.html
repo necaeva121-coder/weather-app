@@ -1,0 +1,25 @@
+<div class="container d-flex flex-wrap align-items-center justify-content-between">
+  <a href="{{url_for('weather.landing')}}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none fw-semibold fs-5">
+    <img class="header__img me-2" src="{{url_for('static',filename='img/weather.png')}}" alt="weather">
+    WeatherApp
+  </a>
+
+  <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
+    <li><a href="{{url_for('weather.landing')}}" class="nav-link px-3 text-white">Главная</a></li>
+    <li><a href="{{url_for('weather.dashboard')}}" class="nav-link px-3 text-white">Погода</a></li>
+    <li><a href="{{url_for('weather.about')}}" class="nav-link px-3 text-white">О приложении</a></li>
+    {% if current_user.is_authenticated %}
+      <li><a href="{{url_for('weather.history')}}" class="nav-link px-3 text-white">История</a></li>
+    {% endif %}
+  </ul>
+
+  <div class="text-end d-flex align-items-center gap-2">
+    {% if current_user.is_authenticated %}
+      <span class="text-white-50">Привет, {{ current_user.login }}</span>
+      <a href="{{url_for('user.logout')}}" class="btn btn-outline-light btn-sm">Выйти</a>
+    {% else %}
+      <a href="{{url_for('user.login')}}" class="btn btn-outline-light btn-sm">Войти</a>
+      <a href="{{url_for('user.register')}}" class="btn btn-warning btn-sm">Регистрация</a>
+    {% endif %}
+  </div>
+</div>

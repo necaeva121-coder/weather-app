@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+
+{% block title %}История запросов{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-header">Последние запросы</div>
+  <div class="table-responsive">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Дата</th>
+          <th>Город</th>
+          <th>Температура</th>
+          <th>Влажность</th>
+          <th>Ветер</th>
+          <th>Описание</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for query in queries %}
+        <tr>
+          <td>{{ query.created_at.strftime('%d.%m %H:%M') }}</td>
+          <td>{{ query.city }}</td>
+          <td>{{ query.temperature }} °C</td>
+          <td>{% if query.humidity is not none %}{{ "%.0f"|format(query.humidity) }}%{% else %}—{% endif %}</td>
+          <td>{{ query.wind_speed }} м/с</td>
+          <td>{{ query.description }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6" class="text-center py-3">Вы ещё не делали запросов</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
